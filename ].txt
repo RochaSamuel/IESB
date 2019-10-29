@@ -1,0 +1,45 @@
+1. Usuario (eMail[PK], nome, nTelefone, senha, sobreNome, sexo, tipoUsuario, contatoEmergencia, dataNascimento) //ENTIDADE
+
+10. Hospedagem ({eMail[FK], codPropriedade[FK]}, checkinDH[PK], checkoutDH) //RELACIONAMENTO 1 <-> 2 (N:N)
+                eMail referencia Usuario
+                codPropriedade referencia Propriedade
+
+2. Propriedade (codPropriedade[PK], modalAluguel, qtdBanheiros, qtdHospedes, categPropriedade, CEP[FK]) //ENTIDADE || RELACIONAMENTO 7 <-> 2 (1:N)
+                CEP referencia Cidade
+
+11. Inclusao ({codPropriedade[FK], codSeguranca[FK]}, qtdDispositivos) //RELACIONAMENTO 2 <-> 3 (N:N)
+              codPropriedade referencia Propriedade
+              codSeguranca referencia Seguranca
+
+3. Seguranca (codSeguranca[PK], descItem, XXXXX) //ENTIDADE
+
+12. Disponibilizacao ({codPropriedade[FK], codCama[FK]}, qtdCamas) //RELACIONAMENTO 2 <-> 4 (N:N)
+                      codPropriedade referencia Propriedade
+                      codCama referencia Camas_Disponiveis
+
+4. Camas_Disponiveis (codCama[PK], tipoCama, YYYYY) //ENTIDADE
+
+13. Diferenciacao ({codPropriedade[FK], codComodidade[FK]}, qtdItens) //RELACIONAMENTO 2 <-> 5 (N:N)
+                   codPropriedade referencia Propriedade
+                   codComodidade referencia Comodidades 
+
+5. Comodidades (codComodidade[PK], tipoComodidade, ZZZZZ) //ENTIDADE
+
+6. Outras_Areas (codPropriedade[FK],codArea[PK], descArea, tamArea) //ENTIDADE FRACA || RELACIONAMENTO 2 <-> 6 (1:N)
+                 codPropriedade referencia Propriedade
+
+7. Cidade (CEP[PK], estado, endereco, pais) //ENTIDADE
+
+15. Realizacao ({CEP[FK], codExp[FK]}) //RELACIONAMENTO 7 <-> 8 (N:N)
+                CEP referencia Cidade
+                codExp referencia Experiencia
+
+16. Residencia ({eMail[FK], CEP[FK]}) //RELACIONAMENTO 7 <-> 1 (N:N)
+                eMail referencia Usuario
+                CEP referencia Cidade
+
+8. Experiencia (codExp[PK], idioma, dataInicio, descricao) //ENTIDADE
+
+17. Oferta ({eMail[FK],codExp[PK],dataHoraOferta[PK]}) //RELACIONAMENTO 8 <-> 1 (N:N)
+            eMail referencia Usuario
+	    codExp referencia Experiencia
